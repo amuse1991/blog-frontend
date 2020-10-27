@@ -1,10 +1,12 @@
 import React from 'react';
+import AuthForm from '../components/auth/AuthForm';
+import AuthTemplate from '../components/auth/AuthTemplate';
 
 function RegisterPage() {
   return (
-    <>
-      회원가입
-    </>
+    <AuthTemplate>
+      <AuthForm type={"register"} />
+    </AuthTemplate>
   )
 }
 
