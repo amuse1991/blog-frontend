@@ -56,26 +56,26 @@ const textMap = {
   register: "회원가입"
 }
 
-function AuthForm({type}:AuthFormProps) {
+function AuthForm({type, form, onChange, onSubmit}:AuthFormProps) {
   const text = textMap[type]
   return (
     <AuthFormBlock>
       <h3>{text}</h3>
-      <form>
-        <StyledInput autoComplete="username" name="username" placeholder="아이디" />
-        <StyledInput autoComplete="new-password" name="password" placeholder="비밀번호" type="password" />
+      <form onSubmit={onSubmit}>
+        <StyledInput autoComplete="username" name="username" placeholder="아이디" onChange={onChange} value={form.username}/>
+        <StyledInput autoComplete="new-password" name="password" placeholder="비밀번호" type="password" onChange={onChange} value={form.password}/>
         {
           type === "register" && (
-            <StyledInput autoComplete="new-password" name="passwordConfirm" placeholder="비밀번호 확인" type="password" />
+            <StyledInput autoComplete="new-password" name="passwordConfirm" placeholder="비밀번호 확인" type="password" onChange={onChange} value={form.passwordConfirm}/>
           )
         }
-        <ButtonWithMarginTop fullWidth cyan>로그인</ButtonWithMarginTop>
+        <ButtonWithMarginTop fullWidth cyan>{text}</ButtonWithMarginTop>
       </form>
       <Footer >
         {
           type === "login" ? (
             <Link to="/register"> 회원가입 </Link> 
-          ): (<Link to="/login"> 회원가입 </Link> )
+          ): (<Link to="/login"> 로그인 </Link> )
         } 
         
       </Footer>
