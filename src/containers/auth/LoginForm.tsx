@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { changeField, initializeForm } from "../../modules/auth";
+import { changeField, initializeForm } from "../../modules/auth/auth";
 import AuthForm from "../../components/auth/AuthForm";
+import { RootState } from "../../modules/index"
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const {form} = useSelector(state=>({
-    form:state.auth.login
-  }))
+  const {form} = useSelector((state:RootState)=>{
+    if(!state || !state.auth){
+      throw new Error("invalid state")
+    }
+    return {
+      form:state.auth.login
+    }
+  })
 
   const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const {value, name} = e.target;
@@ -20,7 +26,7 @@ const LoginForm = () => {
     )
   }
 
-  const onSubmit = (e:React.FormEvent<HTMLInputElement>) => {
+  const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   }
 

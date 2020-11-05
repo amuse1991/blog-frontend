@@ -1,12 +1,9 @@
 import produce, { Draft } from "immer";
+import { AuthAction, AuthState } from "./types";
 
 // actions
 const CHANGE_FIELD = "auth/CHANGE_FIELD" as const;
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM" as const;
-
-type AuthAction =
-  | ReturnType<typeof changeField>
-  | ReturnType<typeof initializeForm>;
 
 // action creators
 export const changeField = (payload: {
@@ -23,21 +20,6 @@ export const initializeForm = (payload: keyof AuthState) => ({
 });
 
 // reducer
-type Register = {
-  username: string;
-  password: string;
-  passwordConfirm: string;
-};
-
-type Login = {
-  username: string;
-  password: string;
-};
-
-type AuthState = {
-  register: Register;
-  login: Login;
-};
 
 const initialState: AuthState = {
   register: {
@@ -67,7 +49,7 @@ const auth = (state: AuthState = initialState, action: AuthAction) => {
         };
       });
     default:
-      break;
+      return state;
   }
 };
 

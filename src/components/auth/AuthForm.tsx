@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import palette from '../../lib/styles/pallette';
 import Button from '../common/Button';
+import { FormData } from "../../modules/auth/types";
 
 
 const ButtonWithMarginTop = styled(Button)`
@@ -49,6 +50,9 @@ const Footer = styled.div`
 
 type AuthFormProps = {
   type: "login" | "register"
+  form: FormData,
+  onChange: (e:React.ChangeEvent<HTMLInputElement>)=>void;
+  onSubmit: (e:React.FormEvent<HTMLFormElement>)=>void;
 }
 
 const textMap = {
